@@ -20,7 +20,7 @@ scripts = [
     {"script": "AS_ORTH.py", "output": "AS_ORTH.xlsx"},
 ]
 
-output_file = "EST BLF BATTING ORDER UPTO SALE 20_updated.xlsx"
+output_file = "EST BLF BATTING ORDER UPTO SALE 21_updated.xlsx"
 
 def run_scripts_and_collect_outputs(scripts):
     output_files = []
@@ -147,7 +147,9 @@ from email.message import EmailMessage
 # Email details
 sender_email = "website@parcon.in"
 receiver_email = "mis@parcon-india.com"
-subject = "EST BLF BATTING ORDER UPTO SALE 20"
+cc_emails = ["oushnik23@gmail.com"]
+
+subject = "EST BLF BATTING ORDER UPTO SALE 21"
 body = """<p>Dear Sir,</p>
 
 <p>Please find the attached Excel file.</P>
@@ -161,12 +163,13 @@ msg = EmailMessage()
 msg['Subject'] = subject
 msg['From'] = sender_email
 msg['To'] = receiver_email
+msg['Cc']=cc_emails
 msg.add_alternative(body, subtype='html')
 
 # Attach the Excel file
-with open('EST BLF BATTING ORDER UPTO SALE 20_updated.xlsx', 'rb') as f:
+with open('EST BLF BATTING ORDER UPTO SALE 21_updated.xlsx', 'rb') as f:
     file_data = f.read()
-    file_name = 'EST BLF BATTING ORDER UPTO SALE 20_updated.xlsx'
+    file_name = 'EST BLF BATTING ORDER UPTO SALE 21_updated.xlsx'
 
 msg.add_attachment(file_data, maintype='application', subtype='vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename=file_name)
 

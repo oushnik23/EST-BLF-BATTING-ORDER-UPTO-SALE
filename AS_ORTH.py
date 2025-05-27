@@ -36,7 +36,7 @@ Case when CAST(substring(FinYear,1,4) as INT64) = Season then Season else 0 end 
 FROM `data-warehousing-prod.EasyReports.SaleTransactionView`
 WHERE
  Season IN (2025,2024) AND Area IN ("AS") AND Centre IN ("KOL","GUW") AND Category IN ('ORTHODOX') AND 
- EstBlf IN ('EST','BLF') AND if(SaleNo>=1 AND SaleNo<=13,52+SaleNo,SaleNo) between 14 and 20
+ EstBlf IN ('EST','BLF') AND if(SaleNo>=1 AND SaleNo<=13,52+SaleNo,SaleNo) between 14 and 21
 
 GROUP BY Centre, GardenMDM, GradeMDM, BuyerMDM, BuyerGroup, 
 BrokerCode, SellerGroup, Category, SubCategory, TeaType, SubTeaType, Area, EstBlf, SaleAlies,
@@ -192,8 +192,8 @@ for row in ws.iter_rows(min_row=1, max_row=ws.max_row, min_col=1, max_col=9):  #
 # Number of header rows from MultiIndex
 header_rows = 2
 
-header_fill = PatternFill(start_color='C6EFCE', end_color='C6EFCE', fill_type='solid')
-index_fill = PatternFill(start_color='FFEB9C', end_color='FFEB9C', fill_type='solid')
+header_fill = PatternFill(start_color='F5F5F5', end_color='F5F5F5', fill_type='solid')
+index_fill = PatternFill(start_color='F5F5F5', end_color='F5F5F5', fill_type='solid')
 
 # Color the MultiIndex header rows (should be rows 1 and 2 at this point)
 for row in ws.iter_rows(min_row=1, max_row=header_rows, min_col=1, max_col=ws.max_column):
@@ -201,6 +201,7 @@ for row in ws.iter_rows(min_row=1, max_row=header_rows, min_col=1, max_col=ws.ma
         cell.fill = header_fill
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.number_format="#,##,##0"
+        cell.font=Font(bold=True)
 
 # Color the index column (A), from data start row to bottom
 data_start_row = header_rows + 1
